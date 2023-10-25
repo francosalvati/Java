@@ -2,7 +2,7 @@ package Parcial;
 
 import java.util.ArrayList;
 
-public class Noticia {
+public class Noticia extends ElementoNoticia implements Comparable<Noticia>{
     private String contenido;
     private String titulo;
     private String autor;
@@ -58,6 +58,20 @@ public class Noticia {
             this.palabrasClaves.add(pc);
     }
 
+    @Override
+    public ArrayList<Noticia> buscar(Filtro f) {
+        ArrayList<Noticia> ret = new ArrayList<>();
+        if(f.cumple(this))
+            ret.add(this);
+        return ret;
+    }
 
-    
+    @Override
+    public int compareTo(Noticia o) {
+        return o.getTitulo().compareTo(this.getTitulo());
+    }
+
+    public String toString(){
+        return this.getTitulo() +" categoria: "+this.getCategoria() + "\n";
+    }
 }
